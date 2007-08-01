@@ -93,5 +93,5 @@ var EffectWatcher = {
   
   stop: function() {
     clearInterval(this.interval);
-  },
+  }
 };

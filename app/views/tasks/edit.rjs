@@ -3,8 +3,8 @@ page.visual_effect 'SlideUp', dom_id(@task), :duration => 0.4
 page.wait_for_effects do
   page.replace_html dom_id(@task), :partial => 'edit'
   page.visual_effect 'SlideDown', dom_id(@task)
-  page[:task_name].select
   page[:task_name].focus
-
-  flash.discard :notice
+  page[:task_name].select
 end
+
+flash.discard :notice
