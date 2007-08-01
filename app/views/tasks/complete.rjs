@@ -1,0 +1,2 @@
+page.visual_effect 'Puff', dom_id(@task)
+page.call 'Tasks.refresh'

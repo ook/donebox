@@ -1,0 +1,20 @@
+<% @title = "Get your Donebox" %>
+
+<%= error_messages_for :user %>
+
+<% form_for :user, :url => users_path do |f| -%>
+  <p><label for="user_login">Login</label><br/>
+  <%= f.text_field :login, :size => 20 %></p>
+
+  <p><label for="user_password">Password</label><br/>
+  <%= f.password_field :password, :size => 15 %></p>
+
+  <p><label for="user_password_confirmation">Confirm Password</label><br/>
+  <%= f.password_field :password_confirmation, :size => 15 %></p>
+
+  <p>
+    <%= submit_tag 'Sign up' %>
+    or
+    <%= link_to 'Login', login_path %>
+  </p>
+<% end -%>

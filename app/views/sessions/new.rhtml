@@ -1,0 +1,18 @@
+<% @title = "Login to your Donebox" %>
+
+<% form_tag sessions_path do -%>
+  <p><label for="login">Login</label><br/>
+  <%= text_field_tag 'login' %></p>
+  
+  <p><label for="password">Password</label><br/>
+  <%= password_field_tag 'password' %></p>
+
+  <p><%= check_box_tag 'remember_me' %>
+  <label for="remember_me">don't ever ask me again!</label></p>
+
+  <p>
+    <%= submit_tag 'Log in' %>
+    or
+    <%= link_to 'Sign up', signup_path %>
+  </p>
+<% end -%>

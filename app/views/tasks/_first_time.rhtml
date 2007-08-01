@@ -1,0 +1,13 @@
+<div id="first_time">
+  <h2>Hi there!</h2>
+  <p>First time here ?</p>
+  <ul>
+    <li>Enter task in the top box</li>
+    <li>Reorder or change tasks date by dragging them</li>
+    <li>Check out the <%= link_to 'task syntax', syntax_path %></li>
+    <li>or some <%= link_to "tools", tools_path %> you could use to spam your Donebox</li>
+    <li>But please don't check the <%= link_to "about page", about_path %></li>
+  </ul>
+  <p>What is this ? Microsoft search puppy assistant ?
+  <%= link_to_function "leave me alone!", "new Effect.BlindUp('first_time'); Tasks.refresh()" %></p>
+</div>

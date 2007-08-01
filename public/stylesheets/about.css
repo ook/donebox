@@ -1,0 +1,16 @@
+code.terminal {
+  display: block;
+  font: Monospace, "Courrier new";
+  padding: 10px;
+  background: #222;
+  color: #fff;
+}
+
+.dialog strong {
+  width: 40px;
+  display: block;
+  float: left;
+  text-align: right;
+  margin-right: 6px;
+  padding-right: 5px;
+}

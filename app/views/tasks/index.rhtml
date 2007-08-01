@@ -1,0 +1,32 @@
+<% content_for :script do %>
+  Tasks.sortUrl = '<%= sort_tasks_path %>'
+  Event.observe(window, 'load', function() {
+    Tasks.init();
+    
+    new Autocompleter.Local('new_task_name', 'categories_list',
+                            <%= js_autocomplete_array(@categories) %>,
+                            {tokens: ' ', fullSearch: false, frequency: 0, minChars: 1});
+  });
+<% end %>
+
+<% remote_form_for(:new_task, :url => tasks_path, :html => { :id => :new_task_form }) do |f| %>
+  <%= f.text_field :name %>
+  <div id="categories_list" class="auto_complete" style="display:none"></div>
+  <%= submit_tag "Today" %>
+  <%= submit_to_remote 'when', 'Later', :url => tasks_path(:later => true) %>
+  <%= link_to 'Completed', completed_tasks_path %>
+<% end %>
+
+<% if @first_time %>
+  <%= render :partial => 'first_time' %>
+<% end %>
+
+<div id="dated_side" class="side">
+  <% group_by_date(@dated_tasks).each do |date, tasks| %>
+    <%= render :partial => "tasks", :locals => { :tasks => tasks, :date => date } %>
+  <% end %>
+</div>
+
+<div id="later_side" class="side">
+  <%= render :partial => "tasks", :locals => { :tasks => @later_tasks, :date => nil } %>
+</div>

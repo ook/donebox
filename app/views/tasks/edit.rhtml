@@ -1,0 +1,31 @@
+<h1>Editing task</h1>
+
+<%= error_messages_for :task %>
+
+<% form_for(:task, :url => task_path(@task), :html => { :method => :put }) do |f| %>
+  <p>
+    <label for="task_name">Name</label><br/>
+    <%= f.text_field :name %>
+  </p>
+  
+  <p>
+    <label for="task_category">Category</label><br/>
+    <%= select :task, :category, current_user.categories, :include_blank => true %>
+  </p>
+  
+  <p>
+    <label for="task_due_on">Due on</label><br/>
+    <%= f.date_select :due_on %>
+  </p>
+  
+  <p>
+    <%= f.check_box :completed %>
+    <label for="task_completed">completed</label>
+  </p>
+
+  <p>
+    <%= submit_tag "Update" %>
+    or
+    <%= link_to 'Cancel', tasks_path, :class => 'cancel' %>
+  </p>
+<% end %>

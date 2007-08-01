@@ -1,0 +1,12 @@
+if (@old_due_on.nil? && @task.due_on.nil?) ||
+   (@old_due_on && @task.due_on && @old_due_on.to_date == @task.due_on.to_date)
+  page.replace_html dom_id(@task), :partial => 'task'
+else
+  # Changing date so change section
+  page[@task].remove
+  page.insert_new_section_for @task
+  page.insert_html :bottom, tasks_dom_id(@task), :partial => 'task'
+end
+page.call 'Tasks.init'
+
+flash.discard :notice

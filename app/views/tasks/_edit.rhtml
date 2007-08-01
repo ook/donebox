@@ -1,0 +1,12 @@
+<% remote_form_for(:task, :url => task_path(@task), :html => { :method => :put }) do |f| %>
+  
+  <%= f.text_field :name %><br/>
+  
+  <%= select :task, :category, current_user.categories, :include_blank => true %><br/>
+  
+  <%= f.date_select :due_on, :start_year => Date.today.year, :include_blank => true %>
+  
+  <%= submit_tag "Update" %>
+  <%= link_to_remote 'Cancel', :url => task_path(@task), :method => :get,
+                               :update => dom_id(@task), :complete => 'Tasks.init();' %>
+<% end %>

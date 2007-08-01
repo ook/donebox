@@ -1,0 +1,15 @@
+<% div_for task do %>
+  <%= check_box_tag dom_id(task) + '_complete', '1', false, 
+                    :onclick => remote_function(:url => complete_task_path(task)),
+                    :class => 'require_js', :style => 'display:none' %>
+  <span class="handle">
+    <% unless task.category.blank? %>
+      <span class="category" onclick="Tasks.highlightCategories('<%=h task.category %>')"><%=h task.category %></span>
+    <% end %>
+    <span class="name"><%= format_task_name task.name %></span>
+  </span>
+  <%= link_to_remote 'Edit', { :url => edit_task_path(task), :method => :get },
+                             { :href => edit_task_path(task), :class => 'edit' } %>
+  <%= link_to_remote image_tag('trash.gif'), { :url => task_path(task), :method => :delete },
+                                             { :title => 'Delete', :class => 'require_js', :style => 'display:none' } %>
+<% end %>

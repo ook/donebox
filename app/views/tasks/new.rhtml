@@ -1,0 +1,21 @@
+<h1>New task</h1>
+
+<%= error_messages_for :task %>
+
+<% form_for(:new_task, :url => tasks_path) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>Due at</b><br />
+    <%= f.date_select :due_on %>
+  </p>
+
+  <p>
+    <%= submit_tag "Create" %>
+    or
+    <%= link_to 'Cancel', tasks_path, :class => 'cancel' %>
+  </p>
+<% end %>

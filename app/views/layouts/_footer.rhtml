@@ -1,0 +1,18 @@
+<div id="footer">
+  <%= link_to 'donebox', home_path %>
+  <% if logged_in? %>
+    <%= link_to 'logout', logout_path %>
+  <% else %>
+    <%= link_to 'login', login_path %>
+    <%= link_to 'sign up', signup_path %>
+  <% end %>
+  <%= link_to 'about', about_path %>
+  <%= link_to 'syntax', syntax_path %>
+  <%= link_to 'api', api_path %>
+  <%= link_to 'tools', tools_path %>
+  -
+  &copy;
+  <%= link_to 'macournoyer', 'http://macournoyer.com' %>
+</div>
+
+<%= render :partial => "layouts/stats" %>

@@ -1,0 +1,37 @@
+<% @title = 'Donebox API' %>
+<h1>Hack your way trough the API <%= link_to_home %></h1>
+
+<p>Donebox API uses XML following <%= link_to 'REST', 'http://en.wikipedia.org/wiki/Representational_State_Transfer' %> <em>charabia</em> (and almost 2.0). But if you don't give a damn about this you might prefer the <%= link_to 'tools page', tools_path %>.</p>
+
+<p>The following examples use <code>curl</code> but could be used with any HTTP client. It's just XML over HTTP with Basic authentication.</p>
+
+<h2>Creating a task</h2>
+<%= curl :post, tasks_url, "-d '<new_task><name>from curl</name></new_task>'" %>
+
+<h2>Getting tasks</h2>
+<%= curl :get, tasks_url %>
+
+<p>Will return something like this:</p>
+
+<pre><code class="terminal">
+<%=h %q(<?xml version="1.0" encoding="UTF-8"?>
+<tasks>
+  <task>
+    <category>donebox</category>
+    <completed-at type="datetime">2007-07-30T18:20:07-07:00</completed-at>
+    <created-at type="datetime">2007-07-29T18:32:56-07:00</created-at>
+    <due-at type="datetime">2007-07-30T00:00:00-07:00</due-at>
+    <id type="integer">1</id>
+    <name>Fix HTTP-AUTH header not transfered</name>
+    <position type="integer">2</position>
+    <user-id type="integer">1</user-id>
+  </task>
+  ...
+<tasks>)%>
+</code></pre>
+
+<p>To get completed tasks, try</p>
+<%= curl :get, completed_tasks_url %>
+
+<h2>Marking a task as complete</h2>
+<%= curl :post, complete_task_url(1) %>

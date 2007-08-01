@@ -1,0 +1,5 @@
+page.replace_html dom_id(@task), :partial => 'edit'
+page[:task_name].select
+page[:task_name].focus
+
+flash.discard :notice

@@ -1,0 +1,14 @@
+<h1>Completed tasks <%= link_to 'Back', tasks_path %></h1>
+<div id="completed_tasks">
+<% @tasks.each do |task| %>
+  <% div_for task do %>
+    <span class="name">"<%=h task.name %>"</span>
+    <span class="date">
+      completed <%= human_date task.completed_at %>
+      (<%= time_ago_in_words task.completed_at %> ago)
+    </span>
+    <%= link_to_remote image_tag('trash.gif'), { :url => task_path(task), :method => :delete },
+                                               { :title => 'Delete' } %>
+  <% end %>
+<% end %>
+</div>

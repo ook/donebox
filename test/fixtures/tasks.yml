@@ -1,0 +1,24 @@
+due_today:
+  id: 1
+  name: Code some tests
+  created_at: 2007-07-27 21:53:18
+  due_on: 2007-07-27 21:53:18
+  completed_at: 
+  user_id: 1
+  category: project
+due_later:
+  id: 2
+  name: Conquer the world
+  created_at: 2007-07-27 21:53:18
+  due_on: 
+  completed_at: 
+  user_id: 1
+  category: project
+completed:
+  id: 3
+  name: Prepare presentation
+  created_at: 2007-07-27 21:53:18
+  due_on: 
+  completed_at: 2007-07-27 21:53:18
+  user_id: 1
+  category: presentation

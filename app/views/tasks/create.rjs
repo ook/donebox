@@ -1,0 +1,8 @@
+page.insert_new_section_for @task
+page.insert_html :bottom, tasks_dom_id(@task), :partial => 'task'
+page.visual_effect 'Highlight', dom_id(@task)
+page[:new_task_form].reset
+
+page.call 'Tasks.init'
+
+flash.discard :notice

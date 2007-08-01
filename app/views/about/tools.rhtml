@@ -1,0 +1,48 @@
+<% @title = 'DoneToolbox' %>
+
+<h1><%= @title %> <%= link_to_home %></h1>
+
+<p>If you're just to lazy to create your own script with the <%= link_to 'API', api_path %> to spam your Donebox, here are two to get your started.</p>
+
+<h2>Bash script</h2>
+
+<p>Create a <code>donebox</code> bash script somewhere your path can find it and paste:</p>
+
+<pre><code class="terminal">
+<%=h %q(#!/usr/bin/env bash
+name="${@}"
+curl -H 'Accept: application/xml' -H 'Content-Type: text/xml' \
+     -u login:password -X POST http://donebox.com/tasks \
+     -d "<new_task><name>${name}</name></new_task>"
+echo) %>
+</code></pre>
+
+<p>Then you'll be able to:</p>
+
+<code class="terminal">
+donebox eat Pad Thai and drink Guru as much as possible for next week 
+</code>
+
+<p>... and magic happens! A task has been created in your Donebox, ^^OMG!!11!!!</p>
+
+
+<h2>Quicksilver</h2>
+
+<p>
+  Maybe you prefer <%= link_to 'Quicksilver', 'http://quicksilver.blacktree.com/' %>.
+  You'll also need <%= link_to 'Growl', 'http://growl.info/' %>.
+</p>
+
+<p>To create a Quicksilver script:</p>
+
+<ol>
+  <li>Download <%= link_to 'this file', '/tools/Donebox.scpt' %></li>
+  <li>Open it and change your login and password, compile and save</li>
+  <li>Put it in <code>~/Library/Application\ Support/Quicksilver/Actions</code> (create any subdirectory as needed)</li>
+  <li>Restart Quicksilver</li>
+  <li>Launch Quicksilver console (default to <em>CTRL+SPACE</em>)</li>
+  <li>Enter text mode by typing <em>.</em> (dot) and type your task</li>
+  <li>Hit <em>TAB</em> and type <em>Donebox</em></li>
+  <li>Hit return</li>
+  <li>Jump of joy</li>
+</ol>

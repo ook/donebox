@@ -1,0 +1,34 @@
+<% @title = 'Donebox task syntax' %>
+
+<h1><%=h @title %> <%= link_to_home %></h1>
+
+<p>When submitting a new task your can use the follow syntax to be uber productive:</p>
+
+<code class="terminal">
+[category] My task description for next week
+</code>
+
+<h2>Category</h2>
+<p>The category is optional. It must be specified inside <code>[]</code> at the beginning of the task.</p>
+
+<h2>Date</h2>
+<p>The date part is also optional. Donebox uses the amazing <%= link_to 'Chronic', 'http://chronic.rubyforge.org/' %> library to parse date. The date must be at the end of the task description. You can use any of these and more:</p>
+
+<ul>
+<% ['thursday',
+     'november',
+     'mon',
+     'today',
+     'tomorrow',
+     'this tuesday',
+     'next month',
+     'thursday last week',
+     'first day of next month',
+     'in 3 days',
+     '3rd wednesday in november',
+     'dec 25'].each do |date| %>
+  <li><%= date %></li>
+<% end %>
+</ul>
+
+<p>Checkout <%= link_to 'Chronic documentation for more', 'http://chronic.rubyforge.org/files/README.html' %>. Note that only the date part is used.</p>

@@ -1,0 +1,4 @@
+page[@task].remove
+page.call 'Tasks.refresh'
+
+flash.discard :notice
