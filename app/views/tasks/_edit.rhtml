@@ -8,5 +8,6 @@
   
   <%= submit_tag "Update" %>
   <%= link_to_remote 'Cancel', :url => task_path(@task), :method => :get,
-                               :update => dom_id(@task), :complete => 'Tasks.init();' %>
+                               :update => dom_id(@task),
+                               :complete => 'Tasks.init();' %>
 <% end %>

@@ -39,6 +39,10 @@ module TasksHelper
               render(:partial => 'tasks', :locals => { :tasks => [], :date => task.due_on ? task.due_on.to_date : nil })
   end
   
+  def refresh
+    page.call 'Tasks.refresh'
+  end
+  
   def js_autocomplete_array(categories)
     "['" + categories.collect { |c| "[#{c}] " }.join("', '") + "']"
   end

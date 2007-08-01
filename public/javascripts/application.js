@@ -7,6 +7,7 @@ var Tasks = {
     // Show javascript specific links
     $$('.require_js').each(function(item) {
       item.show();
+      item.disabled = false;
     });
   },
   
@@ -79,4 +80,18 @@ var Tasks = {
     });
   }
   
+};
+
+var EffectWatcher = {
+  whenComplete: function(callback) {
+    this.interval = setInterval(function() {
+      if (Effect.Queue.size() > 0) return;
+      callback.call();
+      this.stop();
+    }.bind(this), 40);
+  },
+  
+  stop: function() {
+    clearInterval(this.interval);
+  },
 };

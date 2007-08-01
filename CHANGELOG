@@ -1,0 +1,5 @@
+# SVN
+
+- Make checkbox disabled without js to prevent some flickering
+- Add an EffectWatcher to wait for effects completion before processing, also as a rjs helper, page.wait_for_effects
+- Add some effects
