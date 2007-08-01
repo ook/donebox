@@ -1,9 +1,9 @@
 set :application, "donebox.com"
-set :repository, "http://code.macournoyer.com/private/yellowbox/trunk"
+set :repository, "http://code.macournoyer.com/svn/donebox/trunk"
 
-role :web, "donebox.com"
-role :app, "donebox.com"
-role :db,  "donebox.com", :primary => true
+role :web, application
+role :app, application
+role :db,  application, :primary => true
 
 set :deploy_to, "/home/macournoyer/#{application}"
 set :use_sudo, false
