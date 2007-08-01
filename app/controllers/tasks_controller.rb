@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_filter :login_required
+  before_filter :find_task, :only => [:show, :edit, :update, :destroy, :complete]
   
   def index
     @tasks = current_user.tasks
@@ -28,8 +29,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = current_user.tasks.find(params[:id])
-
     respond_to do |format|
       format.xml  { render :xml => @task.to_xml }
       format.js   { render :partial => 'task' }
@@ -41,8 +40,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = current_user.tasks.find(params[:id])
-    
     respond_to do |format|
       format.html
       format.js
@@ -69,7 +66,6 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = current_user.tasks.find(params[:id])
     @old_due_on = @task.due_on
 
     respond_to do |format|
@@ -87,7 +83,6 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = current_user.tasks.find(params[:id])
     @task.destroy
 
     respond_to do |format|
@@ -98,9 +93,8 @@ class TasksController < ApplicationController
   end
   
   def complete
-    @task = current_user.tasks.find(params[:id])
     @task.complete
-    @task.save!
+    @task.save
     
     respond_to do |format|
       format.js
@@ -108,10 +102,8 @@ class TasksController < ApplicationController
     end
   end
   
-  
   def sort
-    param_key = params.keys.detect { |k| k.to_s =~ /^tasks_/ }
-    if param_key
+    if param_key = params.keys.detect { |k| k.to_s =~ /^tasks_/ }
       section_id = param_key.to_s.match(/^tasks_(.*)/)[1].to_i
       date = section_id == 0 ? nil : Time.at(section_id).to_date
       positions = params[param_key]
@@ -126,4 +118,9 @@ class TasksController < ApplicationController
     
     head :ok
   end
+  
+  private
+    def find_task
+      @task = current_user.tasks.find(params[:id])
+    end
 end

@@ -9,6 +9,5 @@ class AboutController < ApplicationController
   end
   
   def syntax
-    
   end
 end
