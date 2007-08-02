@@ -3,7 +3,7 @@ require 'chronic'
 class Task < ActiveRecord::Base
   attr_protected :user_id
   
-  acts_as_list
+  acts_as_list :scope => :user_id
   
   validates_presence_of :name
   
