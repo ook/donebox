@@ -7,8 +7,8 @@ class Task < ActiveRecord::Base
   
   validates_presence_of :name
   
-  before_validation :extract_category_from_name
-  before_validation :extract_due_date_from_name
+  before_create :extract_category_from_name
+  before_create :extract_due_date_from_name
   
   def due_later?
     !due_on?
