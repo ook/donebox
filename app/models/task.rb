@@ -33,7 +33,7 @@ class Task < ActiveRecord::Base
   
   private
     def extract_category_from_name
-      extracted_category, extracted_name = /^(?:\[(\w+)\]|)\s?(.*)$/.match(self.name)[1,2]
+      extracted_category, extracted_name = /^(?:\[([^\]]+)\]|)\s?(.*)$/.match(self.name)[1,2]
       
       if extracted_category
         self.category = extracted_category
