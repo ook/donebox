@@ -1,3 +1,4 @@
 config/database.yml
 db/donebox_*
 log/*
+tmp/
