@@ -84,6 +84,13 @@ class UserTest < Test::Unit::TestCase
     assert users(:quentin).remember_token_expires_at.between?(before, after)
   end
 
+  def test_should_accept_ze
+    assert_difference 'User.count' do
+      user = create_user({ :login => 'ze' })
+      assert !user.new_record?, "#{user.errors.full_messages.to_sentence}"
+    end
+  end
+
   protected
     def create_user(options = {})
       User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))
