@@ -12,22 +12,22 @@
 ActiveRecord::Schema.define(:version => 20080802192105) do
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
+    t.string   "session_id", :default => "", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "tasks", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "due_on"
     t.datetime "completed_at"
-    t.integer  "position"
-    t.integer  "user_id"
+    t.integer  "position",     :limit => 11
+    t.integer  "user_id",      :limit => 11
     t.string   "category"
   end
 
