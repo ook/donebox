@@ -1,6 +1,8 @@
 require 'chronic'
 
 class Task < ActiveRecord::Base
+  has_one :category
+
   attr_protected :user_id
   
   acts_as_list :scope => :user_id
