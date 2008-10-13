@@ -7,9 +7,11 @@ class CreateCategories < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_column :tasks, :category_id, :integer
   end
 
   def self.down
+    remove_column :tasks, :category
     drop_table :categories
     rename_column :tasks, :legacy_cat, :category
   end

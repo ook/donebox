@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
   end
   
   def categories
-    tasks.find(:all).collect(&:category.name).reject(&:blank?).uniq.sort
+    tasks.find(:all).collect(&:category).reject(&:blank?).uniq.collect(&:name).sort    
   end
 
   protected
@@ -80,6 +80,6 @@ class User < ActiveRecord::Base
     def create_sample_task
       self.tasks.create :name     => 'Try Donebox and be more productive than David Allen himself',
                         :due_on   => Date.today,
-                        :category => 'donebox'
+                        :category => Category.find_or_create_by_name('donebox')
     end
 end
