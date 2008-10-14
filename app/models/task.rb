@@ -7,6 +7,13 @@ class Task < ActiveRecord::Base
   
   acts_as_list :scope => :user_id
   
+  named_scope :dated, :conditions => 'due_on IS NOT NULL AND completed_at IS NULL',
+                      :order => 'due_on, position'
+  named_scope :later, :conditions => 'due_on IS NULL AND completed_at IS NULL',
+                      :order => 'position'
+  named_scope :completed, :conditions => 'completed_at IS NOT NULL',
+                          :order => 'completed_at desc'
+
   validates_presence_of :name
   
   before_create :extract_category_from_name
