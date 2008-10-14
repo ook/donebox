@@ -2,7 +2,7 @@
   
   <%= f.text_field :name %><br/>
   
-  <%= select :task, :category, current_user.categories, :include_blank => true %><br/>
+  <%= select :task, :category_id, Category.find(:all).collect { |c| [c.name, c.id]}, :include_blank => true %><br/>
   
   <%= f.date_select :due_on, :start_year => Date.today.year, :include_blank => true %>
   

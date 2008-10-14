@@ -1,6 +1,8 @@
 require 'chronic'
 
 class Task < ActiveRecord::Base
+  belongs_to :category
+  
   attr_protected :user_id
   
   acts_as_list :scope => :user_id
@@ -36,7 +38,7 @@ class Task < ActiveRecord::Base
       extracted_category, extracted_name = /^(?:\[([^\]]+)\]|)\s?(.*)$/.match(self.name)[1,2]
       
       if extracted_category
-        self.category = extracted_category
+        self.category = Category.find_or_create_by_name_and_user_id(extracted_category, user_id)
         self.name = extracted_name
       end
     end

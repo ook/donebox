@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+  require File.dirname(__FILE__) + '/../test_helper'
 
 class TaskTest < Test::Unit::TestCase
   fixtures :tasks, :users
@@ -49,12 +49,12 @@ class TaskTest < Test::Unit::TestCase
   def test_extract_category_from_name
     task = Task.new :name => '[project] Write some tests'
     task.instance_eval{extract_category_from_name}
-    assert_equal 'project', task.category
+    assert_equal 'project', task.category.name
     assert_equal 'Write some tests', task.name
     
     task = Task.new :name => '[cool-project] Write some cooler tests'
     task.instance_eval{extract_category_from_name}
-    assert_equal 'cool-project', task.category
+    assert_equal 'cool-project', task.category.name
     assert_equal 'Write some cooler tests', task.name
     
     task = Task.new :name => 'Write some tests'

@@ -1,0 +1,24 @@
+class RemoveCategoryFromTasks < ActiveRecord::Migration
+  def self.up
+    Task.find(:all).each { |t|
+      if t.legacy_cat
+        cat = Category.find_or_create_by_name(t.legacy_cat)
+        puts "Category.class=#{cat.class.name}, name=#{cat.name}"
+        t.category = cat
+        t.save
+      end
+    }
+    remove_column :tasks, :legacy_cat
+  end
+
+  def self.down
+    add_column :tasks, :legacy_cat, :string
+    Task.find(:all).each { |t|
+      if t.category
+        t.legacy_cat = t.category.name
+        t.category = nil
+        t.save
+      end
+    }
+  end
+end

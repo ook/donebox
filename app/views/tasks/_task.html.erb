@@ -4,8 +4,8 @@
                                                 :loading => "new Effect.Puff('#{dom_id(task)}')"),
                     :class => 'require_js', :disabled => 'disabled' %>
   <span class="handle">
-    <% unless task.category.blank? %>
-      <span class="category" onclick="Tasks.highlightCategories('<%=h task.category %>')"><%=h task.category %></span>
+    <% unless task.category.nil? %>
+      <span class="category" onclick="Tasks.highlightCategories('<%=h task.category.name %>')"><%=h task.category.name %></span>
     <% end %>
     <span class="name"><%= format_task_name task.name %></span>
   </span>
