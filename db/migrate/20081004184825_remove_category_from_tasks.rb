@@ -3,7 +3,6 @@ class RemoveCategoryFromTasks < ActiveRecord::Migration
     Task.find(:all).each { |t|
       if t.legacy_cat
         cat = Category.find_or_create_by_name(t.legacy_cat)
-        puts "Category.class=#{cat.class.name}, name=#{cat.name}"
         t.category = cat
         t.save
       end
