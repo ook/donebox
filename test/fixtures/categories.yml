@@ -1,0 +1,12 @@
+project:
+  id: 1
+  name: Project
+  user_id: 1
+misc:
+  id: 2
+  name: Miscellaneous
+  user_id: 1
+other_project:
+  id: 3
+  name: Project
+  user_id: 2

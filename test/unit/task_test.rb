@@ -1,10 +1,11 @@
   require File.dirname(__FILE__) + '/../test_helper'
 
 class TaskTest < Test::Unit::TestCase
-  fixtures :tasks, :users
+  fixtures :tasks, :users, :categories
   
   def setup
     @user = User.find(1)
+    @other_user = User.find(2)
   end
 
   def test_find_dated
@@ -63,8 +64,9 @@ class TaskTest < Test::Unit::TestCase
     assert_equal 'Write some tests', task.name
   end
   
-  def find_all_categories
-    assert_equal %w(presentation project), @user.categories
+  def test_find_all_categories
+    assert_equal %w(Project Miscellaneous), @user.categories
+    assert_equal %w(Project), @other_user.categories
   end
   
   def test_extract_due_date_from_name_with_idioms
