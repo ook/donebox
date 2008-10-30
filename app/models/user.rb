@@ -62,7 +62,8 @@ class User < ActiveRecord::Base
   end
   
   def categories
-    tasks.find(:all).collect(&:category).reject(&:blank?).uniq.collect(&:name).sort    
+    # tasks.find(:all).collect(&:category).reject(&:blank?).uniq.collect(&:name).sort    
+    Category.find_all_by_user_id(id).collect(&:name).sort
   end
 
   protected

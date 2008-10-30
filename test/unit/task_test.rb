@@ -2,18 +2,13 @@
 
 class TaskTest < Test::Unit::TestCase
   fixtures :tasks, :users, :categories
-  
-  def setup
-    @user = User.find(1)
-    @other_user = User.find(2)
-  end
 
   def test_find_dated
-    assert_equal [tasks(:due_today)], @user.tasks.dated
+    assert_equal [tasks(:due_today)], users(:quentin).tasks.dated
   end
   
   def test_find_for_later
-    assert_equal [tasks(:due_later)], @user.tasks.later
+    assert_equal [tasks(:due_later)], users(:quentin).tasks.later
   end
   
   def test_completed
@@ -43,7 +38,7 @@ class TaskTest < Test::Unit::TestCase
   end
   
   def test_create_with_name
-    task = @user.tasks.create :name => 'testing'
+    task = users(:quentin).tasks.create :name => 'testing'
     assert_valid task
   end
   
@@ -65,8 +60,8 @@ class TaskTest < Test::Unit::TestCase
   end
   
   def test_find_all_categories
-    assert_equal %w(Project Miscellaneous), @user.categories
-    assert_equal %w(Project), @other_user.categories
+    assert_equal %w(Miscellaneous Project), users(:quentin).categories
+    assert_equal %w(Project), users(:aaron).categories
   end
   
   def test_extract_due_date_from_name_with_idioms
