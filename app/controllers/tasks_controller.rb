@@ -40,6 +40,9 @@ class TasksController < ApplicationController
   end
 
   def edit
+    puts current_user
+    puts current_user.categories.size
+    @categories = current_user.categories
     respond_to do |format|
       format.html
       format.js
