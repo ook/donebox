@@ -43,17 +43,17 @@ class TaskTest < Test::Unit::TestCase
   end
   
   def test_extract_category_from_name
-    task = Task.new :name => '[project] Write some tests'
+    task = Task.new :name => '[project] Write some tests', :user => users(:quentin)
     task.instance_eval{extract_category_from_name}
     assert_equal 'project', task.category.name
     assert_equal 'Write some tests', task.name
     
-    task = Task.new :name => '[cool-project] Write some cooler tests'
+    task = Task.new :name => '[cool-project] Write some cooler tests', :user => users(:quentin)
     task.instance_eval{extract_category_from_name}
     assert_equal 'cool-project', task.category.name
     assert_equal 'Write some cooler tests', task.name
     
-    task = Task.new :name => 'Write some tests'
+    task = Task.new :name => 'Write some tests', :user => users(:quentin)
     task.instance_eval{extract_category_from_name}
     assert_equal nil, task.category
     assert_equal 'Write some tests', task.name
