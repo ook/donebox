@@ -10,7 +10,7 @@
   
   <p>
     <label for="task_category">Category</label><br/>
-    <%= select :task, :category, current_user.categories, :include_blank => true %>
+    <%= select :task, :category, @categories, :include_blank => true %>
   </p>
   
   <p>

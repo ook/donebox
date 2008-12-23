@@ -42,7 +42,7 @@ class TasksController < ApplicationController
   def edit
     puts current_user
     puts current_user.categories.size
-    @categories = current_user.categories
+    @categories = current_user.categories.sort
     respond_to do |format|
       format.html
       format.js
