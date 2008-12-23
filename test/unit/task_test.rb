@@ -60,8 +60,8 @@ class TaskTest < Test::Unit::TestCase
   end
   
   def test_find_all_categories
-    assert_equal %w(Miscellaneous Project), users(:quentin).categories
-    assert_equal %w(Project), users(:aaron).categories
+    assert_equal %w(Miscellaneous Project), users(:quentin).categories_values
+    assert_equal %w(Project), users(:aaron).categories_values
   end
   
   def test_extract_due_date_from_name_with_idioms

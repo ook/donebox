@@ -46,7 +46,8 @@ class Task < ActiveRecord::Base
       extracted_category, extracted_name = /^(?:\[([^\]]+)\]|)\s?(.*)$/.match(self.name)[1,2]
       
       if extracted_category
-        self.category = Category.find_or_create_by_name_and_user_id(extracted_category, user.id)
+        self.category = Category.find_by_name_and_user_id(extracted_category, user.id)
+        self.category ||= Category.create(:name => extracted_category, :user_id => user.id)
         self.name = extracted_name
       end
     end

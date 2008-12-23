@@ -1,6 +1,7 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
-  has_many :tasks
+  has_many :tasks, :dependent => :destroy
+  has_many :categories, :dependent => :destroy
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password
@@ -61,9 +62,8 @@ class User < ActiveRecord::Base
     save(false)
   end
   
-  def categories
-    # tasks.find(:all).collect(&:category).reject(&:blank?).uniq.collect(&:name).sort    
-    Category.find_all_by_user_id(id).collect(&:name).sort
+  def categories_values
+    categories.collect(&:name).sort
   end
 
   protected
