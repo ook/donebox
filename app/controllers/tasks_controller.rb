@@ -6,7 +6,7 @@ class TasksController < ApplicationController
     @tasks = current_user.tasks
     @dated_tasks = current_user.tasks.dated
     @later_tasks = current_user.tasks.later
-    @categories = current_user.categories_values
+    @categories  = current_user.categories_values
     
     unless cookies[:been_here]
       @first_time = true
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @categories = current_user.categories_values
+    @categories = current_user.categories.collect { |c| [c.name, c.id] }
     respond_to do |format|
       format.html
       format.js
