@@ -53,6 +53,15 @@ class Task < ActiveRecord::Base
     end
     
     def extract_due_date_from_name
+      # first, try to extract due date from the last comma
+      name_parts = self.name.split(',')
+      date = Chronic.parse(name_parts[-1])
+      if date
+        self.due_on = date.to_date
+        self.name = name_parts[0, name_parts.size-1].join(',')
+        return
+      end
+
       name_parts = self.name.split(' ')
       date = date_part = nil
       

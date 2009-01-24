@@ -76,6 +76,16 @@ class TaskTest < Test::Unit::TestCase
     task.instance_eval{extract_due_date_from_name}
     assert_equal Time.parse('2007-02-01').to_date, task.due_on
     assert_equal 'Do this', task.name
+
+    task = Task.new :name => 'Test it never or die, tomorrow'
+    task.instance_eval{extract_due_date_from_name}
+    assert_equal Time.parse('2007-01-02').to_date, task.due_on
+    assert_equal 'Test it never or die', task.name
+
+    task = Task.new :name => 'Test it now, or die, tomorrow'
+    task.instance_eval{extract_due_date_from_name}
+    assert_equal Time.parse('2007-01-02').to_date, task.due_on
+    assert_equal 'Test it now, or die', task.name
   end
   
   def test_extract_due_date_from_name_with_metric
@@ -98,5 +108,16 @@ class TaskTest < Test::Unit::TestCase
     task.instance_eval{extract_due_date_from_name}
     assert_nil task.due_on
     assert_equal 'Add support for linking', task.name
+
+    task = Task.new :name => 'Add support for linking, or not'
+    task.instance_eval{extract_due_date_from_name}
+    assert_nil task.due_on
+    assert_equal 'Add support for linking, or not', task.name
+
+    task = Task.new :name => 'Add support for linking, or not, or... nevermind'
+    task.instance_eval{extract_due_date_from_name}
+    assert_nil task.due_on
+    assert_equal 'Add support for linking, or not, or... nevermind', task.name
+
   end
 end
