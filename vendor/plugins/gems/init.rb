@@ -7,8 +7,8 @@ if gems.any?
     lib = File.join(dir, 'lib')
     if File.directory?(lib)
       $LOAD_PATH.unshift(lib) 
-      Dependencies.load_paths << lib
-      Dependencies.load_once_paths << lib
+      ActiveSupport::Dependencies.load_paths << lib
+      ActiveSupport::Dependencies.load_once_paths << lib
     end
   end
 end
