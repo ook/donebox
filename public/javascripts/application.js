@@ -73,7 +73,7 @@ var Tasks = {
   
   highlightCategories: function(category) {
     $$('.task').each(function(task) {
-      categoryElement = task.getElementsByClassName('category').first();
+      categoryElement = task.getElementsByClassName('category')[0];
       if (categoryElement != null && categoryElement.innerHTML == category) {
         new Effect.Highlight(task);
       }
