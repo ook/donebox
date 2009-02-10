@@ -27,6 +27,10 @@ class Task < ActiveRecord::Base
   def complete
     self.completed_at = Time.now
   end
+
+  def undo_complete
+    self.completed_at = nil
+  end
   
   def completed?
     self.completed_at?

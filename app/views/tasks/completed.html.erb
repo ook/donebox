@@ -2,6 +2,9 @@
 <div id="completed_tasks">
 <% @tasks.each do |task| %>
   <% div_for task do %>
+    <%- if task.category -%>
+    <span class="category"><%=h task.category.name %></span> 
+    <%- end -%>
     <span class="name">"<%=h task.name %>"</span>
     <span class="date">
       completed <%= human_date task.completed_at %>
@@ -9,6 +12,7 @@
     </span>
     <%= link_to_remote image_tag('trash.gif'), { :url => task_path(task), :method => :delete },
                                                { :title => 'Delete' } %>
+     - <%= link_to 'Oups! I misclicked!', undo_complete_task_path(task) %>
   <% end %>
 <% end %>
 </div>

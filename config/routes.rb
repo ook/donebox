@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :tasks, :member     => { :complete => :post },
+  map.resources :tasks, :member     => { :complete => :post, :undo_complete => :post },
                         :collection => { :sort => :post, :completed => :get }
 
   map.resources :users, :sessions
