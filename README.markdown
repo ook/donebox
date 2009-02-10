@@ -18,3 +18,4 @@ I plan to implement a full set of features, but only in a plugin way: donebox ha
 
 - You can follow work on github: http://github.com/ook/donebox
 - You can report bugs and ask for features here: http://redmine.ookook.fr
+- You can get informations from my blog: http://blog.ookook.fr/category/donebox
