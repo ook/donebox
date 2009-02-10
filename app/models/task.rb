@@ -43,7 +43,9 @@ class Task < ActiveRecord::Base
   
   private
     def extract_category_from_name
-      extracted_category, extracted_name = /^(?:\[([^\]]+)\]|)\s?(.*)$/.match(self.name)[1,2]
+      md = /^(?:\[([^\]]+)\]|@(\S+)|)\s?(.*)$/.match(self.name).to_a
+      extracted_category, extracted_name = md[1] , md[3]
+      extracted_category ||= md[2].gsub(/_/, ' ') if !md[2].nil?
       
       if extracted_category
         self.category = Category.find_by_name_and_user_id(extracted_category, user.id)

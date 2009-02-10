@@ -57,6 +57,16 @@ class TaskTest < Test::Unit::TestCase
     task.instance_eval{extract_category_from_name}
     assert_equal nil, task.category
     assert_equal 'Write some tests', task.name
+
+    task = Task.new :name => '@ShortCategory Write tests with shortcuts', :user => users(:quentin)
+    task.instance_eval{extract_category_from_name}
+    assert_equal 'ShortCategory', task.category.name
+    assert_equal 'Write tests with shortcuts', task.name
+
+    task = Task.new :name => '@Short_Category Write tests with shortcuts', :user => users(:quentin)
+    task.instance_eval{extract_category_from_name}
+    assert_equal 'Short Category', task.category.name
+    assert_equal 'Write tests with shortcuts', task.name
   end
   
   def test_find_all_categories
