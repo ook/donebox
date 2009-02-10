@@ -42,7 +42,7 @@ var Tasks = {
     if (Effect.Queue.size() > 0) return;
     
     $$('.dynamic').each(function(element) {
-      if (element.getElementsByClassName('task').find(function(child) { return child.visible() }) == null) {
+      if (element.select('.task').find(function(child) { return child.visible() }) == null) {
         new Effect.Fade(element.id + '_title');
         element.hide();
       }
@@ -73,7 +73,7 @@ var Tasks = {
   
   highlightCategories: function(category) {
     $$('.task').each(function(task) {
-      categoryElement = task.getElementsByClassName('category').first();
+      categoryElement = task.getElementsByClassName('category')[0];
       if (categoryElement != null && categoryElement.innerHTML == category) {
         new Effect.Highlight(task);
       }
