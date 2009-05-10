@@ -1,0 +1,4 @@
+page.wait_for_effects do
+  page[@task].remove
+  page.refresh
+end

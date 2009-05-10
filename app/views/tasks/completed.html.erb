@@ -1,3 +1,8 @@
+<% content_for :script do %>
+  Event.observe(window, 'load', function() {
+    Tasks.init();
+  });
+<% end %>
 <h1>Completed tasks <%= link_to 'Back', tasks_path %></h1>
 <div id="completed_tasks">
 <% @tasks.each do |task| %>

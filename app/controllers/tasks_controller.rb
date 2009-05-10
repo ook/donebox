@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_filter :login_required
-  before_filter :find_task, :only => [:show, :edit, :update, :destroy, :complete]
+  before_filter :find_task, :only => [:show, :edit, :update, :destroy, :complete, :uncomplete]
   
   def index
     @tasks = current_user.tasks
@@ -105,6 +105,7 @@ class TasksController < ApplicationController
 
   def uncomplete
     @task.uncomplete
+    @task.save
 
     respond_to do |format|
       format.js
