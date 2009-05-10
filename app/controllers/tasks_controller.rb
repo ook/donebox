@@ -102,6 +102,15 @@ class TasksController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def uncomplete
+    @task.uncomplete
+
+    respond_to do |format|
+      format.js
+      format.xml { head :ok }
+    end
+  end
   
   def sort
     if param_key = params.keys.detect { |k| k.to_s =~ /^tasks_/ }

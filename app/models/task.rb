@@ -32,7 +32,7 @@ class Task < ActiveRecord::Base
     self.completed_at?
   end
   alias_method :completed, :completed?
-  
+
   def completed=(v)
     v ? complete : uncomplete
   end

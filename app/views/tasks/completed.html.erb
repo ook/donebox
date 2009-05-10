@@ -9,6 +9,8 @@
     </span>
     <%= link_to_remote image_tag('trash.gif'), { :url => task_path(task), :method => :delete },
                                                { :title => 'Delete' } %>
+    <%= link_to_remote 'Recover task', { :url => uncomplete_task_path(task), :method => :post },
+                                       { :title => 'Recover' } %>
   <% end %>
 <% end %>
 </div>
