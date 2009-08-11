@@ -1,5 +1,5 @@
 <h2 id="<%= tasks_dom_id date %>_title" <%= 'class="late"' if late(date) %>>
-  <%= date ? human_date(date) : 'Later' %>
+  <%= date.kind_of?(Date) ? human_date(date) : date %>
 </h2>
 <div id="<%= tasks_dom_id date %>" class="tasks <%= 'dynamic' unless permanent_date?(date) %>">
   <%= render :partial => 'task', :collection => tasks %>

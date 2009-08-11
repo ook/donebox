@@ -48,6 +48,11 @@ h2.late {
   clear: both;
 }
 
+#asap_side.side {
+  float: left;
+  width: 100%;
+}
+
 .side {
   float: left;
   width: 50%;

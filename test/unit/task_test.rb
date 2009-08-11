@@ -45,7 +45,7 @@ class TaskTest < Test::Unit::TestCase
   def test_extract_category_from_name
     task = Task.new :name => '[project] Write some tests', :user => users(:quentin)
     task.instance_eval{extract_category_from_name}
-    assert_equal 'project', task.category.name
+    assert_equal 'project', task.category.name.downcase
     assert_equal 'Write some tests', task.name
     
     task = Task.new :name => '[cool-project] Write some cooler tests', :user => users(:quentin)
@@ -128,6 +128,13 @@ class TaskTest < Test::Unit::TestCase
     task.instance_eval{extract_due_date_from_name}
     assert_nil task.due_on
     assert_equal 'Add support for linking, or not, or... nevermind', task.name
+  end
 
+  def test_set_kind
+    task = Task.create :name => 'No date', :user => users(:quentin)
+    assert_equal 'asap', task.kind
+    task.due_on = Date.today
+    task.save
+    assert_nil task.kind
   end
 end

@@ -1,11 +1,12 @@
 class TasksController < ApplicationController
   before_filter :login_required
   before_filter :find_task, :only => [:show, :edit, :update, :destroy, :complete, :uncomplete]
-  
+
   def index
     @tasks = current_user.tasks
     @dated_tasks = current_user.tasks.dated
     @later_tasks = current_user.tasks.later
+    @asap_tasks  = current_user.tasks.asap
     @categories  = current_user.categories_values
     
     unless cookies[:been_here]
@@ -40,7 +41,8 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @categories = current_user.categories.collect { |c| [c.name, c.id] }
+    current_user.categories.reload
+    @categories = current_user.categories.collect{ |c| [c.name, c.id] }.sort_by { |pair| pair.first.downcase }
     respond_to do |format|
       format.html
       format.js
@@ -50,7 +52,9 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(params[:new_task])
     
-    @task.due_on = Date.today unless params[:later] && @task.due_on.nil?
+    if @task.due_on.nil?
+      @task.kind = params[:later] ? 'later' : 'asap'
+    end
 
     respond_to do |format|
       if @task.save

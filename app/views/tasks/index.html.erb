@@ -12,7 +12,7 @@
 <% remote_form_for(:new_task, :url => tasks_path, :html => { :id => :new_task_form }) do |f| %>
   <%= f.text_field :name %>
   <div id="categories_list" class="auto_complete" style="display:none"></div>
-  <%= submit_tag "Today" %>
+  <%= submit_tag "Asap" %>
   <%= submit_to_remote 'when', 'Later', :url => tasks_path(:later => true) %>
   <%= link_to 'Completed', completed_tasks_path %>
 <% end %>
@@ -21,6 +21,10 @@
   <%= render :partial => 'first_time' %>
 <% end %>
 
+<div id="asap_side" class="side">
+  <%= render :partial => "tasks", :locals => { :tasks => @asap_tasks, :date => 'ASAP' } %>
+</div>
+
 <div id="dated_side" class="side">
   <% group_by_date(@dated_tasks).each do |date, tasks| %>
     <%= render :partial => "tasks", :locals => { :tasks => tasks, :date => date } %>
@@ -28,5 +32,5 @@
 </div>
 
 <div id="later_side" class="side">
-  <%= render :partial => "tasks", :locals => { :tasks => @later_tasks, :date => nil } %>
+  <%= render :partial => "tasks", :locals => { :tasks => @later_tasks, :date => 'Later' } %>
 </div>

@@ -21,6 +21,7 @@ module TasksHelper
   end
   
   def late(date)
+    return false unless date.kind_of? Date
     date && date.to_date < Date.today
   end
   
@@ -31,7 +32,7 @@ module TasksHelper
   end
   
   def permanent_date?(date)
-    [Date.today, 1.days.since.to_date, nil].include? date
+    [Date.today, 1.days.since.to_date, 'Later', 'ASAP'].include? date
   end
   
   def insert_new_section_for(task)
