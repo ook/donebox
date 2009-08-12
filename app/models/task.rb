@@ -82,22 +82,11 @@ class Task < ActiveRecord::Base
       end
     end
 
-    def dump(hash)
-      ret = ''
-      hash.each_pair do |k,v|
-        old_val = v.first 
-        new_val = v.last 
-        old_val ||= 'nil'
-        new_val ||= 'nil'
-        ret += "{ #{k} => [#{old_val}, #{new_val}] }\n"
-      end
-      ret
-    end
-
     def set_kind
       will_kind = changes['kind'] ? changes['kind'].last : kind
       will_due_on = changes['due_on'] ? changes['due_on'].last : due_on
 
+      # due_one always rules over kind
       if will_due_on.nil? && will_kind.nil?
         self.kind = 'asap'
       end

@@ -9,15 +9,13 @@ module TasksHelper
   def tasks_dom_id(element)
     case element
     when Task
-      date = element.due_on
+      date = element.due_on || element.kind
     when Date
-      date = element
+      date = element.to_time.to_i
+    when String
+      date = element.downcase
     end
-    if date
-      "tasks_#{date.to_time.to_i}"
-    else
-      "tasks_later"
-    end
+    "tasks_#{date}"
   end
   
   def late(date)
