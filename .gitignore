@@ -1,7 +1,6 @@
 TAGS
 config/database.yml
 db/donebox_*
-db/schema.rb
 log/*
 tmp/
 nbproject/
