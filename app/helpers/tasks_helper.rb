@@ -43,6 +43,7 @@ module TasksHelper
   end
   
   def js_autocomplete_array(categories)
-    "['" + categories.collect { |c| "[#{c}] " }.join("', '") + "']"
+    "['" + categories.collect { |c| "[#{c}] " }.join("', '") + "', '" + 
+    categories.collect { |c| "@#{c} " }.join("', '") + "']"
   end
 end
