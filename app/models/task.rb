@@ -1,6 +1,7 @@
 require 'chronic'
 
 class Task < ActiveRecord::Base
+  KINDS = [:later, :asap ]
   belongs_to :category
   belongs_to :user
   

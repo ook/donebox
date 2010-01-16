@@ -119,14 +119,17 @@ class TasksController < ApplicationController
   
   def sort
     if param_key = params.keys.detect { |k| k.to_s =~ /^tasks_/ }
-      section_id = param_key.to_s.match(/^tasks_(.*)/)[1].to_i
-      date = section_id == 0 ? nil : Time.at(section_id).to_date
+      section = param_key.to_s.match(/^tasks_(.*)/)[1]
+      date, kind = parse_section(section)
       positions = params[param_key]
       
       positions.each_with_index do |task_id, position|
         task = current_user.tasks.find(task_id)
+        Rails.logger.debug("===== Ta = #{task.inspect}")
         task.position = position + 1
         task.due_on = date
+        task.kind = kind
+        Rails.logger.debug("===== Tb = #{task.inspect}")
         task.save
       end if positions
     end
@@ -137,5 +140,14 @@ class TasksController < ApplicationController
   private
     def find_task
       @task = current_user.tasks.find(params[:id])
+    end
+
+    def parse_section(section)
+      Rails.logger.debug("======== S => #{section.inspect}")
+      kind = Task::KINDS.include?(section.to_sym) ? section : nil
+      unless kind
+        date = section.to_i == 0 ? nil : Time.at(section.to_i).to_date
+      end
+      [date, kind]
     end
 end

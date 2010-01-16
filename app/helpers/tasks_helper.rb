@@ -9,12 +9,14 @@ module TasksHelper
   def tasks_dom_id(element)
     case element
     when Task
-      date = element.due_on || element.kind
+      date = element.due_on.to_i || element.kind
     when Date
       date = element.to_time.to_i
     when String
       date = element.downcase
     end
+      Rails.logger.debug("===== element = #{element.inspect}")
+      Rails.logger.debug("===== date = #{date}")
     "tasks_#{date}"
   end
   
