@@ -15,8 +15,6 @@ module TasksHelper
     when String
       date = element.downcase
     end
-      Rails.logger.debug("===== element = #{element.inspect}")
-      Rails.logger.debug("===== date = #{date}")
     "tasks_#{date}"
   end
   
