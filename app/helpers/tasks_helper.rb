@@ -9,7 +9,7 @@ module TasksHelper
   def tasks_dom_id(element)
     case element
     when Task
-      date = element.due_on.to_i || element.kind
+      date = element.kind || element.due_on.to_i
     when Date
       date = element.to_time.to_i
     when String
@@ -35,7 +35,7 @@ module TasksHelper
   
   def insert_new_section_for(task)
     page.call 'Tasks.insertNewSection', tasks_dom_id(task),
-              render(:partial => 'tasks', :locals => { :tasks => [], :date => task.due_on ? task.due_on.to_date : nil })
+              render(:partial => 'tasks', :locals => { :tasks => [], :date => task.due_on ? task.due_on.to_date : task.kind })
   end
   
   def refresh
