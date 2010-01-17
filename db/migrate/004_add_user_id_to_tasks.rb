@@ -1,6 +1,6 @@
 class AddUserIdToTasks < ActiveRecord::Migration
   def self.up
-    add_column :tasks, :user_id, :integer, :null => false
+    add_column :tasks, :user_id, :integer
   end
 
   def self.down
